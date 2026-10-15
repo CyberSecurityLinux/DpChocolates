@@ -19,16 +19,16 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Download and Setup Gradle 8.13 Manually
+    - name: Build with Gradle 8.13 Directly
       run: |
-        # Global gradle ni pakkanapetti, direct ga Gradle 8.13 bin zip ni download chestunnam
-        wget https://services.gradle.org/distributions/gradle-8.13-bin.zip
+        # 1. Gradle 8.13 zip ని డౌన్లోడ్ చేసి అన్‌జిప్ చేద్దాం
+        wget -q https://services.gradle.org/distributions/gradle-8.13-bin.zip
         unzip -q gradle-8.13-bin.zip
-        sudo mv gradle-8.13 /opt/gradle
-        sudo ln -s /opt/gradle/bin/gradle /usr/bin/gradle
         
-        # Wrapper files generate chesi build start chesthunnam
-        gradle wrapper --gradle-version 8.13 --distribution-type bin
+        # 2. గ్లోబల్ గ్రేడిల్ జోలికి వెళ్లకుండా, నేరుగా 8.13 పాత్ తోనే వ్రాపర్ జనరేట్ చేద్దాం
+        ./gradle-8.13/bin/gradle wrapper --gradle-version 8.13 --distribution-type bin
+        
+        # 3. పర్మిషన్స్ ఇచ్చి APK బిల్డ్ చేద్దాం
         chmod +x ./gradlew
         ./gradlew assembleDebug --no-daemon
 
