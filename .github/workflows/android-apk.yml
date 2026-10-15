@@ -19,9 +19,9 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Generate Gradle Wrapper & Build APK
+    - name: Generate Gradle Wrapper (Fixed Version 8.13) & Build
       run: |
-        gradle wrapper --gradle-version 8.13
+        gradle wrapper --gradle-version 8.13 --distribution-type bin
         chmod +x ./gradlew
         ./gradlew assembleDebug --no-daemon
 
