@@ -19,9 +19,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Generate Gradle Wrapper (Fixed Version 8.13) & Build
+    - name: Force Gradle 8.13 via Wrapper & Build
       run: |
-        gradle wrapper --gradle-version 8.13 --distribution-type bin
+        # Force download and use Gradle 8.13 wrapper directly
+        ./gradlew wrapper --gradle-version 8.13 --distribution-type bin || gradle wrapper --gradle-version 8.13 --distribution-type bin
         chmod +x ./gradlew
         ./gradlew assembleDebug --no-daemon
 
